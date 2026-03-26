@@ -1,0 +1,13 @@
+services:
+  - type: web
+    name: griffe-dor-hbpc
+    runtime: node
+    plan: free
+    buildCommand: npm install
+    startCommand: npm start
+    repo: https://github.com/leosaari/griffe-dor-hbpc
+    branch: main
+    autoDeploy: true
+    envVars:
+      - key: NODE_ENV
+        value: production
