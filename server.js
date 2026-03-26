@@ -126,12 +126,12 @@ app.get('/{*splat}', (req, res) => {
 app.listen(PORT, () => {
   console.log(`🦁 LA GRIFFE D'OR - Serveur démarré sur http://localhost:${PORT}`);
 
-  // Keep-alive: ping self every 14 min to prevent Render free tier sleep
-  if (process.env.RENDER_EXTERNAL_URL) {
-    const url = process.env.RENDER_EXTERNAL_URL + '/api/health';
+  // Keep-alive: ping self every 5 min to prevent Render free tier sleep
+  const externalUrl = process.env.RENDER_EXTERNAL_URL || 'https://griffe-dor-hbpc.onrender.com';
+  if (process.env.RENDER || process.env.RENDER_EXTERNAL_URL) {
     setInterval(() => {
-      fetch(url).catch(() => {});
-    }, 14 * 60 * 1000);
-    console.log('🔄 Keep-alive activé — ping toutes les 14 min');
+      fetch(externalUrl + '/api/health').catch(() => {});
+    }, 5 * 60 * 1000);
+    console.log('🔄 Keep-alive activé — ping toutes les 5 min sur ' + externalUrl);
   }
 });
