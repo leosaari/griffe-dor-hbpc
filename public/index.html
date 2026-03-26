@@ -5,11 +5,30 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
   <title>LA GRIFFE D'OR — HBPC vs METZ</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet"></noscript>
   <link rel="stylesheet" href="style.css">
   <link rel="icon" type="image/png" href="img/favicon.png">
+  <style>
+    /* Critical inline CSS for instant first paint */
+    body{margin:0;background:#0D0D0D;color:#fff;font-family:-apple-system,BlinkMacSystemFont,sans-serif}
+    #loader{position:fixed;inset:0;background:#0D0D0D;display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:9999;transition:opacity .4s}
+    #loader.hide{opacity:0;pointer-events:none}
+    #loader img{width:100px;height:100px;object-fit:contain;animation:pulse 1.2s ease-in-out infinite}
+    #loader h1{font-family:'Oswald',sans-serif;font-size:1.8rem;background:linear-gradient(135deg,#F5D060,#D4A017,#B8860B);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-top:16px;letter-spacing:2px}
+    #loader p{color:#888;font-size:.85rem;margin-top:8px}
+    @keyframes pulse{0%,100%{transform:scale(1);opacity:1}50%{transform:scale(1.08);opacity:.8}}
+  </style>
 </head>
 <body>
+  <!-- Loader instant -->
+  <div id="loader">
+    <img src="img/logo-hbpc.png" alt="HBPC" onerror="this.style.display='none'">
+    <h1>LA GRIFFE D'OR</h1>
+    <p>Chargement...</p>
+  </div>
+
   <div id="app">
 
     <!-- ===== STEP 1: INSCRIPTION ===== -->

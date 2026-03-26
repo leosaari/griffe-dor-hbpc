@@ -1,5 +1,14 @@
 // ===== LA GRIFFE D'OR — App =====
 
+// Hide loader when app is ready
+window.addEventListener('DOMContentLoaded', () => {
+  const loader = document.getElementById('loader');
+  if (loader) {
+    loader.classList.add('hide');
+    setTimeout(() => loader.remove(), 500);
+  }
+});
+
 (function () {
   'use strict';
 

@@ -113,6 +113,11 @@ app.get('/api/admin/pronostics', (req, res) => {
   res.json(rows);
 });
 
+// Health check for keep-alive
+app.get('/api/health', (req, res) => {
+  res.json({ status: 'ok' });
+});
+
 // Fallback to index
 app.get('/{*splat}', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'index.html'));
@@ -120,4 +125,13 @@ app.get('/{*splat}', (req, res) => {
 
 app.listen(PORT, () => {
   console.log(`🦁 LA GRIFFE D'OR - Serveur démarré sur http://localhost:${PORT}`);
+
+  // Keep-alive: ping self every 14 min to prevent Render free tier sleep
+  if (process.env.RENDER_EXTERNAL_URL) {
+    const url = process.env.RENDER_EXTERNAL_URL + '/api/health';
+    setInterval(() => {
+      fetch(url).catch(() => {});
+    }, 14 * 60 * 1000);
+    console.log('🔄 Keep-alive activé — ping toutes les 14 min');
+  }
 });
