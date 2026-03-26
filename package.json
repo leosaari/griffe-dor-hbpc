@@ -1,0 +1,17 @@
+{
+  "name": "griffe-dor-hbpc",
+  "version": "1.0.0",
+  "description": "La Griffe d'Or - Jeu de pronostics HBPC vs Metz Handball",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "better-sqlite3": "^12.8.0",
+    "express": "^5.2.1"
+  }
+}

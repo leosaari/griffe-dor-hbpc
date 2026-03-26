@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <title>LA GRIFFE D'OR — HBPC vs METZ</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <link rel="icon" type="image/png" href="img/favicon.png">
+</head>
+<body>
+  <div id="app">
+
+    <!-- ===== STEP 1: INSCRIPTION ===== -->
+    <section id="step1" class="step active">
+      <div class="hero">
+        <div class="logo-container">
+          <img src="img/logo-hbpc.png" alt="HBPC" class="hero-logo" onerror="this.style.display='none'">
+        </div>
+        <h1 class="title-gold">LA GRIFFE D'OR</h1>
+        <p class="subtitle">HBPC vs METZ HANDBALL</p>
+        <p class="subtitle-small">Palais des Sports de Marseille</p>
+      </div>
+
+      <div class="card">
+        <h2>Inscris-toi pour jouer</h2>
+        <div class="form-group">
+          <label for="prenom">Prénom *</label>
+          <input type="text" id="prenom" placeholder="Ton prénom" autocomplete="given-name" maxlength="50">
+          <span class="error-msg" id="error-prenom"></span>
+        </div>
+
+        <div class="form-group">
+          <label>Contact * <span class="label-hint">(pour te contacter si tu gagnes)</span></label>
+          <div class="contact-toggle">
+            <button class="toggle-btn active" data-type="phone" id="btn-phone">Téléphone</button>
+            <button class="toggle-btn" data-type="email" id="btn-email">Email</button>
+          </div>
+          <input type="tel" id="contact-phone" placeholder="06 12 34 56 78" autocomplete="tel" class="contact-input active">
+          <input type="email" id="contact-email" placeholder="ton@email.com" autocomplete="email" class="contact-input">
+          <span class="error-msg" id="error-contact"></span>
+        </div>
+
+        <div class="form-group checkbox-group">
+          <label class="checkbox-label">
+            <input type="checkbox" id="rules-accept">
+            <span class="checkmark"></span>
+            <span>J'accepte le <a href="#reglement" id="show-rules">règlement</a> du jeu-concours La Griffe d'Or</span>
+          </label>
+          <span class="error-msg" id="error-rules"></span>
+        </div>
+
+        <button class="btn-primary" id="btn-next-step2">
+          CONTINUER
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </button>
+      </div>
+    </section>
+
+    <!-- ===== STEP 2: PRONOSTIC ===== -->
+    <section id="step2" class="step">
+      <div class="step-header">
+        <button class="back-btn" id="btn-back-step1">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+        </button>
+        <h1 class="title-gold small">LA GRIFFE D'OR</h1>
+      </div>
+
+      <div class="card pronostic-card">
+        <h2>Ton pronostic</h2>
+        <p class="prono-instruction">Quel sera le score final ?</p>
+
+        <div class="score-board">
+          <div class="team">
+            <div class="team-logo-wrap">
+              <img src="img/logo-hbpc.png" alt="HBPC" class="team-logo" onerror="this.textContent='HBPC'">
+            </div>
+            <span class="team-name">HBPC</span>
+            <div class="stepper">
+              <button class="stepper-btn minus" data-team="hbpc" aria-label="Diminuer score HBPC">−</button>
+              <span class="score-value" id="score-hbpc">0</span>
+              <button class="stepper-btn plus" data-team="hbpc" aria-label="Augmenter score HBPC">+</button>
+            </div>
+          </div>
+
+          <div class="vs-separator">
+            <span class="vs-dash">—</span>
+          </div>
+
+          <div class="team">
+            <div class="team-logo-wrap">
+              <img src="img/logo-metz.png" alt="METZ" class="team-logo" onerror="this.textContent='METZ'">
+            </div>
+            <span class="team-name">METZ</span>
+            <div class="stepper">
+              <button class="stepper-btn minus" data-team="metz" aria-label="Diminuer score Metz">−</button>
+              <span class="score-value" id="score-metz">0</span>
+              <button class="stepper-btn plus" data-team="metz" aria-label="Augmenter score Metz">+</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="prono-preview">
+          <span class="preview-team">HBPC</span>
+          <span class="preview-score" id="preview-hbpc">0</span>
+          <span class="preview-dash">-</span>
+          <span class="preview-score" id="preview-metz">0</span>
+          <span class="preview-team">METZ</span>
+        </div>
+
+        <div class="form-group bonus-group">
+          <label for="meilleure-joueuse">Question bonus <span class="label-hint">(pour départager les ex-aequo)</span></label>
+          <p class="bonus-question">Qui sera la meilleure joueuse du match ?</p>
+          <input type="text" id="meilleure-joueuse" placeholder="Nom de la joueuse (optionnel)" maxlength="100">
+        </div>
+
+        <button class="btn-primary btn-send" id="btn-submit">
+          ENVOYER MON PRONOSTIC 🦁
+        </button>
+      </div>
+    </section>
+
+    <!-- ===== STEP 3: CONFIRMATION ===== -->
+    <section id="step3" class="step">
+      <div class="confirmation">
+        <div class="scratch-animation" id="scratch-anim"></div>
+        <div class="confirm-content">
+          <div class="confirm-icon">🏆</div>
+          <h1 class="title-gold">Ta griffe est posée !</h1>
+          <p class="confirm-subtitle">Ton pronostic a bien été enregistré</p>
+
+          <div class="recap-card">
+            <div class="recap-score">
+              <span>HBPC</span>
+              <strong id="recap-hbpc">0</strong>
+              <span class="recap-dash">-</span>
+              <strong id="recap-metz">0</strong>
+              <span>METZ</span>
+            </div>
+            <div class="recap-joueuse" id="recap-joueuse-wrap" style="display:none">
+              <span>Meilleure joueuse :</span>
+              <strong id="recap-joueuse"></strong>
+            </div>
+          </div>
+
+          <div class="counter-box">
+            <span class="counter-fire">🔥</span>
+            <span id="total-count">0</span> pronostics déjà enregistrés
+          </div>
+
+          <p class="reveal-msg">Résultat révélé en fin de match sur l'écran géant !</p>
+
+          <button class="btn-share" id="btn-share">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg>
+            Partager le lien
+          </button>
+          <span class="share-toast" id="share-toast">Lien copié !</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== MODAL REGLEMENT ===== -->
+    <div class="modal-overlay" id="modal-rules">
+      <div class="modal">
+        <button class="modal-close" id="close-rules">&times;</button>
+        <h2>Règlement du jeu-concours</h2>
+        <div class="modal-body">
+          <p><strong>LA GRIFFE D'OR — Jeu-concours gratuit sans obligation d'achat</strong></p>
+          <p>Organisé par le Handball Plan de Cuques (HBPC) à l'occasion du match HBPC vs Metz Handball au Palais des Sports de Marseille.</p>
+          <ul>
+            <li>Participation gratuite, limitée à 1 pronostic par personne.</li>
+            <li>Le participant doit renseigner son prénom et un moyen de contact (téléphone ou email).</li>
+            <li>Le pronostic porte sur le score final du match et optionnellement la meilleure joueuse.</li>
+            <li>Le gagnant est celui dont le pronostic est le plus proche du score réel. En cas d'égalité, la question bonus départage.</li>
+            <li>Le lot : un maillot signé par la meilleure joueuse du match.</li>
+            <li>Le gagnant sera contacté par téléphone ou email après le match.</li>
+            <li>Les données personnelles sont utilisées uniquement dans le cadre de ce jeu-concours.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== ALREADY PLAYED SCREEN ===== -->
+    <section id="already-played" class="step">
+      <div class="confirmation">
+        <div class="confirm-content">
+          <div class="confirm-icon">🦁</div>
+          <h1 class="title-gold">Déjà joué !</h1>
+          <p class="confirm-subtitle">Tu as déjà posé ta griffe.<br>Un seul pronostic par personne !</p>
+          <p class="reveal-msg">Résultat révélé en fin de match sur l'écran géant !</p>
+        </div>
+      </div>
+    </section>
+
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
